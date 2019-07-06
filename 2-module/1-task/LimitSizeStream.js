@@ -9,12 +9,10 @@ class LimitSizeStream extends stream.Transform {
 
     this.setLimit(options.limit);
     this.resetCounter();
-    console.log('1 limit', this.limit);
   }
 
   _transform(chunk, encoding, callback) {
     const str = chunk.toString('utf-8');
-    console.log('str', chunk);
     this.incCounter(str.length);
     if (this.checkCounterAndLimit()) {
       callback(null, str);
