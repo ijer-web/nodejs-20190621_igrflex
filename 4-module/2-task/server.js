@@ -56,6 +56,7 @@ server.on('request', (req, res) => {
         res.statusCode = 201;
         res.end('ok');
       });
+
       req.on('aborted', () => {
         fs.unlink(filepath, () => {});
       });
@@ -68,10 +69,6 @@ server.on('request', (req, res) => {
   }
 });
 
-server.on('clientError', (err, socket) => {
-  fs.unlink(filePath, () => {
-    socket.end();
-  });
-});
+
 
 module.exports = server;
