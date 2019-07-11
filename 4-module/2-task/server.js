@@ -39,10 +39,7 @@ server.on('request', (req, res) => {
         // console.log('catched size error');
         res.statusCode = 413;
         res.end('too big');
-        fs.unlink(
-            filepath, () => {
-
-            });
+        fs.unlink(filepath, () => {});
 
         // const temp = filepath + Date.now();
         // fs.rename(filepath, temp, (err) => {
@@ -59,6 +56,9 @@ server.on('request', (req, res) => {
         res.statusCode = 201;
         res.end('ok');
       });
+      req.on('aborted', () => {
+        fs.unlink(filepath, () => {});
+      });
 
       break;
 
@@ -68,10 +68,10 @@ server.on('request', (req, res) => {
   }
 });
 
-// server.on('clientError', (err, socket) => {
-//   fs.unlink(filePath, () => {
-//
-//   });
-// });
+server.on('clientError', (err, socket) => {
+  fs.unlink(filePath, () => {
+    socket.end();
+  });
+});
 
 module.exports = server;
