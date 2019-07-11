@@ -18,12 +18,14 @@ server.on('request', (req, res) => {
   const limitedStream = new LimitSizeStream({limit: 1000000});
   const filepath = path.join(__dirname, 'files', pathname);
 
+
+  // console.log('filepath', filepath);
   switch (req.method) {
     case 'POST':
       const stream = fs.createWriteStream(filepath, {flags: 'wx'});
       req.pipe(limitedStream).pipe(stream);
       stream.on('error', (err) => {
-        console.log(' stream err.code', err.code);
+        // console.log(' stream err.code', err.code);
         if (err.code === 'EEXIST') {
           res.statusCode = 409;
           res.end('file already exists');
@@ -34,11 +36,23 @@ server.on('request', (req, res) => {
       });
 
       limitedStream.on('error', (err) => {
-        console.log('catched size error');
+        // console.log('catched size error');
         res.statusCode = 413;
         res.end('too big');
-        fs.unlink(filepath, () => {
-        });
+        fs.unlink(
+            filepath, () => {
+
+            });
+
+        // const temp = filepath + Date.now();
+        // fs.rename(filepath, temp, (err) => {
+        //   if (err) throw err;
+        //   console.log('Rename complete!');
+        //   fs.unlink(temp, (err) => {
+        //     if (err) console.error('remove error', err);
+        //     else console.log('removed');
+        //   });
+        // });
       });
 
       stream.on('close', () => {
@@ -54,10 +68,10 @@ server.on('request', (req, res) => {
   }
 });
 
-server.on('clientError', (err, socket) => {
-  fs.unlink(filePath, () => {
-
-  });
-});
+// server.on('clientError', (err, socket) => {
+//   fs.unlink(filePath, () => {
+//
+//   });
+// });
 
 module.exports = server;
