@@ -18,3 +18,4 @@ module.exports.categoryList = async function categoryList(ctx, next) {
   } catch (err) {
     ctx.throw(500);
   }
+};
