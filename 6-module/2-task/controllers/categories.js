@@ -1,7 +1,6 @@
 const Category = require('../models/Category');
 
 module.exports.categoryList = async function categoryList(ctx, next) {
-  console.log('categoryList');
 
   try {
     const findResult = await Category.find({});
