@@ -4,7 +4,6 @@ const User = require('../../models/User');
 module.exports = new LocalStrategy(
     {session: false},
     async function(email, password, done) {
-      // console.log('пришли в стратегию локальную');
 
       try {
         // console.log('TRY ');
