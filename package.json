@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Node.JS Course Materials",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --no-warnings --reporter=reporter.js  *module/*task/**/*.test.js --timeout 50000",
-    "test:local": "cross-env NODE_ENV=test node --no-warnings local.js ",
+    "test": "cross-env NODE_ENV=test mocha --no-warnings --reporter=reporter.js *module/*task/**/*.test.js",
+    "test:local": "cross-env NODE_ENV=test node --no-warnings local.js",
     "lint": "eslint ."
   },
   "keywords": [],
