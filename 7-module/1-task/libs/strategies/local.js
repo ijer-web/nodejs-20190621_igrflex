@@ -2,12 +2,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../../models/User');
 
 module.exports = new LocalStrategy(
-    {session: false},
+    {session: false,
+      usernameField: 'email',
+    },
     async function(email, password, done) {
-
       try {
-        // console.log('TRY ');
         const user = await User.findOne({email: email});
+
         if (!user) return done(null, false, 'Нет такого пользователя');
 
         const isValidPass = await user.checkPassword(password);
@@ -17,8 +18,6 @@ module.exports = new LocalStrategy(
 
         return done(null, user);
       } catch (err) {
-        // console.log(' ОШибка пришли в стратегию локальную');
-
         done(err);
       }
     }

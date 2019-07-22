@@ -8,11 +8,9 @@ module.exports.login = async function login(ctx, next) {
     if (err) throw err;
 
     // console.log('err', err);
-    // console.log('user', user);
-    // console.log('info', info);
+    console.log('user', user);
+    console.log('info', info);
     if (!user) {
-      // console.log('юзера нет');
-
       ctx.status = 400;
       ctx.body = {error: info};
       return;
