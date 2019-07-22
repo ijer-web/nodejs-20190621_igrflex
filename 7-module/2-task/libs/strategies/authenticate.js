@@ -17,7 +17,6 @@ module.exports = async function authenticate(strategy, email, displayName, done)
       });
       user = await user.save();
     }
-
     done(null, user);
   } catch (e) {
     done(e);
