@@ -1,6 +1,5 @@
 const User = require('../../models/User');
 
-
 module.exports = async function authenticate(strategy, email, displayName, done) {
 
   try {
@@ -21,4 +20,5 @@ module.exports = async function authenticate(strategy, email, displayName, done)
   } catch (e) {
     done(e);
   }
+
 };
