@@ -9,6 +9,8 @@ module.exports = new VkontakteStrategy({
   scope: ['user:email'],
   session: false,
 }, function(accessToken, refreshToken, params, profile, done) {
+
+  console.log('here VK');
   authenticate('vkontakte', params.email, profile.displayName, done);
 }
 );
