@@ -12,6 +12,27 @@ server.on('request', (req, res) => {
   switch (req.method) {
     case 'DELETE':
 
+      if (pathname.includes('/')) {
+        res.statusCode = 400;
+        res.end('Bad request');
+      };
+
+      fs.unlink(filepath, function(err) {
+        if (err) {
+          res.statusCode = 404;
+          res.end('No file such path');
+        }
+        res.statusCode = 200;
+        res.end('ok');
+      });
+
+      req.on('error', function(err) {
+        if (err) {
+          res.statusCode = 500;
+          res.end('*** internal error ***');
+        };
+      });
+
       break;
 
     default:
