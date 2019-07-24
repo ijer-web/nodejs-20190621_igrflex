@@ -16,6 +16,7 @@ module.exports = new LocalStrategy(
           return done(null, false, 'Невереный пароль');
         }
 
+
         if (user.verificationToken) done(null, false, 'Подтвердите email');
 
         return done(null, user);
