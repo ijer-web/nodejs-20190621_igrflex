@@ -1,10 +1,15 @@
 const User = require('../../models/User');
 
 module.exports = async function authenticate(strategy, email, displayName, done) {
-
   try {
     if (!email) {
       return done(null, false, 'Не указан email');
+    }
+
+
+    // HERE!!  why STOPPED ?
+    if (!/^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(email)) {
+      return done(null, false, 'ValidationError');
     }
 
     let user = await User.findOne({email});
@@ -20,5 +25,4 @@ module.exports = async function authenticate(strategy, email, displayName, done)
   } catch (e) {
     done(e);
   }
-
 };
