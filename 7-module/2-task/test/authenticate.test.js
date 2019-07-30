@@ -6,7 +6,6 @@ const users = require('../fixtures/users');
 
 describe('7-module-2-task', () => {
   describe('функция аутентификации', function() {
-    this.timeout(5000);
     before(async () => {
       await User.deleteMany();
 
